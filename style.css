@@ -1,0 +1,7 @@
+body.badApple > *:not(.bad-apple-thumbnail) {
+    filter: brightness(0.25);
+}
+
+body.badApple {
+    cursor: none;
+}
