@@ -74,6 +74,7 @@ function playBadApple() {
     for (let row = 0; row < rows; row++) {
         const rowArray = [];
         for (let col = 0; col < cols; col++) {
+            const character = shuffledCharacters.pop();
             const image = new Image(pixelSize, pixelSize);
             image.style.position = 'absolute';
             image.style.top = `${row * pixelSize}px`;
@@ -84,11 +85,10 @@ function playBadApple() {
             image.style.objectFit = 'cover';
             image.classList.add('bad-apple-thumbnail');
             document.body.appendChild(image);
-            image.src = getThumbnailUrl('avatar', shuffledCharacters[(row * cols + col) % shuffledCharacters.length].avatar);
+            image.src = getThumbnailUrl('avatar', character.avatar);
             rowArray.push(image);
 
             // Shuffle again if we've used all characters
-            shuffledCharacters.pop();
             if (shuffledCharacters.length === 0) {
                 shuffledCharacters.push(...shuffle(characters.slice()));
             }
