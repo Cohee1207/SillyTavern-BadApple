@@ -136,7 +136,7 @@ function playBadApple() {
         canvas.height = video.height;
     };
     const keyDownHandler = (event) => {
-        if (event.key === 'Escape') {
+        if (event.key === 'Escape' || event instanceof TouchEvent) {
             video.pause();
         }
     };
