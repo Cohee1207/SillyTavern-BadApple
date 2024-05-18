@@ -46,7 +46,6 @@ function playBadApple() {
     video.width = window.innerWidth;
     video.height = window.innerHeight;
     document.body.classList.add('badApple');
-    document.body.appendChild(video);
 
     const cover = document.createElement('div');
     cover.classList.add('badAppleCover');
@@ -54,6 +53,7 @@ function playBadApple() {
 
     // Capture a frame every 100ms
     const canvas = new OffscreenCanvas(window.innerWidth, window.innerHeight);
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
     canvas.width = video.width;
     canvas.height = video.height;
 
@@ -90,8 +90,7 @@ function playBadApple() {
         imageRows.push(rowArray);
     }
 
-    const intervalId = setInterval(() => {
-        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const update = () => {
         ctx.drawImage(video, 0, 0, video.width, video.height);
         const imageData = ctx.getImageData(0, 0, video.width, video.height);
         for (let row = 0; row < rows; row++) {
@@ -123,7 +122,11 @@ function playBadApple() {
                 imageRows[row][col].style.opacity = `${opacity}`;
             }
         }
-    }, 50);
+
+        if (!video.ended && !video.paused) {
+            requestAnimationFrame(update);
+        }
+    };
 
     const resizeHandler = () => {
         video.width = window.innerWidth;
@@ -141,7 +144,6 @@ function playBadApple() {
     window.addEventListener('keydown', keyDownHandler);
 
     const onEnded = () => {
-        clearInterval(intervalId);
         document.body.removeChild(cover);
         document.body.removeChild(video);
         document.querySelectorAll('.badAppleThumbnail').forEach((element) => {
@@ -153,4 +155,6 @@ function playBadApple() {
     };
     video.addEventListener('pause', onEnded);
     video.addEventListener('ended', onEnded);
+    video.addEventListener('play', () => requestAnimationFrame(update));
+    document.body.appendChild(video);
 }
