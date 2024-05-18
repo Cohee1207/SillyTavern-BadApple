@@ -51,14 +51,13 @@ function playBadApple() {
     cover.classList.add('badAppleCover');
     document.body.appendChild(cover);
 
-    // Capture a frame every 100ms
     const canvas = new OffscreenCanvas(window.innerWidth, window.innerHeight);
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     canvas.width = video.width;
     canvas.height = video.height;
 
     const imageRows = [];
-    const divisor = 64;
+    const divisor = 50;
     const pixelSize = Math.ceil(window.innerWidth / divisor);
     const rows = Math.ceil(window.innerHeight / pixelSize);
     const cols = Math.ceil(window.innerWidth / pixelSize);
