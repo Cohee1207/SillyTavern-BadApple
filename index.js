@@ -143,6 +143,7 @@ function playBadApple() {
 
     window.addEventListener('resize', resizeHandler);
     window.addEventListener('keydown', keyDownHandler);
+    window.addEventListener('touchstart', keyDownHandler);
 
     const onEnded = () => {
         document.body.removeChild(cover);
@@ -152,6 +153,7 @@ function playBadApple() {
         });
         window.removeEventListener('resize', resizeHandler);
         window.removeEventListener('keydown', keyDownHandler);
+        window.removeEventListener('touchstart', keyDownHandler);
         document.body.classList.remove('badApple');
     };
     video.addEventListener('pause', onEnded);
