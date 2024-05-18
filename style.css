@@ -1,4 +1,33 @@
 body.badApple {
-    filter: brightness(0.25);
     cursor: none;
+}
+
+body #badAppleVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -999999;
+    opacity: 0;
+}
+
+body .badAppleCover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 999990;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.25;
+}
+
+.badAppleThumbnail {
+    position: absolute;
+    z-index: 999999;
+    opacity: 0;
+    filter: grayscale(50%) !important;
+    object-fit: cover;
 }

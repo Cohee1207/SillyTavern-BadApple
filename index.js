@@ -26,7 +26,7 @@ function createButton() {
 }
 
 function playBadApple() {
-    const existingElement = document.getElementById('bad-apple-video');
+    const existingElement = document.getElementById('badAppleVideo');
     if (existingElement instanceof HTMLVideoElement) {
         return existingElement.pause();
     }
@@ -40,18 +40,17 @@ function playBadApple() {
     const videoUrl = '/scripts/extensions/third-party/SillyTavern-BadApple/bad_apple.mp4';
     const video = document.createElement('video');
     video.src = videoUrl;
-    video.id = 'bad-apple-video';
+    video.id = 'badAppleVideo';
     video.autoplay = true;
     video.muted = false;
     video.width = window.innerWidth;
     video.height = window.innerHeight;
-    video.style.position = 'absolute';
-    video.style.top = '0';
-    video.style.left = '0';
-    video.style.zIndex = '-999999';
-    video.style.opacity = '0';
     document.body.classList.add('badApple');
     document.body.appendChild(video);
+
+    const cover = document.createElement('div');
+    cover.classList.add('badAppleCover');
+    document.body.appendChild(cover);
 
     // Capture a frame every 100ms
     const canvas = new OffscreenCanvas(window.innerWidth, window.innerHeight);
@@ -76,14 +75,9 @@ function playBadApple() {
         for (let col = 0; col < cols; col++) {
             const character = shuffledCharacters.pop();
             const image = new Image(pixelSize, pixelSize);
-            image.style.position = 'absolute';
             image.style.top = `${row * pixelSize}px`;
             image.style.left = `${col * pixelSize}px`;
-            image.style.opacity = '0';
-            image.style.filter = 'grayscale(50%) !important';
-            image.style.zIndex = '999999';
-            image.style.objectFit = 'cover';
-            image.classList.add('bad-apple-thumbnail');
+            image.classList.add('badAppleThumbnail');
             document.body.appendChild(image);
             image.src = getThumbnailUrl('avatar', character.avatar);
             rowArray.push(image);
@@ -148,8 +142,9 @@ function playBadApple() {
 
     const onEnded = () => {
         clearInterval(intervalId);
+        document.body.removeChild(cover);
         document.body.removeChild(video);
-        document.querySelectorAll('.bad-apple-thumbnail').forEach((element) => {
+        document.querySelectorAll('.badAppleThumbnail').forEach((element) => {
             document.body.removeChild(element);
         });
         window.removeEventListener('resize', resizeHandler);
