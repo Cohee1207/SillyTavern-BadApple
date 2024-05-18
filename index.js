@@ -79,13 +79,19 @@ function playBadApple() {
             image.style.top = `${row * pixelSize}px`;
             image.style.left = `${col * pixelSize}px`;
             image.style.opacity = '0';
-            image.style.filter = 'grayscale(50%)';
+            image.style.filter = 'grayscale(50%) !important';
             image.style.zIndex = '999999';
             image.style.objectFit = 'cover';
             image.classList.add('bad-apple-thumbnail');
             document.body.appendChild(image);
             image.src = getThumbnailUrl('avatar', shuffledCharacters[(row * cols + col) % shuffledCharacters.length].avatar);
             rowArray.push(image);
+
+            // Shuffle again if we've used all characters
+            shuffledCharacters.pop();
+            if (shuffledCharacters.length === 0) {
+                shuffledCharacters.push(...shuffle(characters.slice()));
+            }
         }
         imageRows.push(rowArray);
     }
