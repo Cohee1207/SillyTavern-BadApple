@@ -5,7 +5,7 @@ function createButton() {
     const extensionButton = document.createElement('div');
     extensionButton.classList.add('list-group-item', 'flex-container', 'flexGap5');
     const icon = document.createElement('i');
-    icon.classList.add('fa-brands', 'fa-apple');
+    icon.classList.add('fa-solid', 'fa-apple-whole');
     const text = document.createElement('span');
     text.innerText = 'Bad Apple';
     extensionButton.appendChild(icon);
@@ -43,6 +43,8 @@ function playBadApple() {
     video.id = 'badAppleVideo';
     video.autoplay = true;
     video.muted = false;
+    video.controls = false;
+    video.playsInline = true;
     video.width = window.innerWidth;
     video.height = window.innerHeight;
     document.body.classList.add('badApple');
@@ -58,7 +60,7 @@ function playBadApple() {
 
     const imageRows = [];
     const divisor = 50;
-    const pixelSize = Math.ceil(window.innerWidth / divisor);
+    const pixelSize = Math.ceil(Math.max(window.innerWidth, window.innerHeight) / divisor);
     const rows = Math.ceil(window.innerHeight / pixelSize);
     const cols = Math.ceil(window.innerWidth / pixelSize);
     const shuffle = (array) => {
