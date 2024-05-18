@@ -128,8 +128,8 @@ function playBadApple() {
     const resizeHandler = () => {
         video.width = window.innerWidth;
         video.height = window.innerHeight;
-        canvas.width = window.width;
-        canvas.height = window.height;
+        canvas.width = video.width;
+        canvas.height = video.height;
     };
     const keyDownHandler = (event) => {
         if (event.key === 'Escape') {
