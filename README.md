@@ -20,4 +20,5 @@ Bad Apple video is from <https://archive.org/details/bad-apple-resources>
 ## License
 
 Code: AGPLv3
+
 Video: idk, don't sue me
