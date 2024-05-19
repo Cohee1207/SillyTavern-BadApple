@@ -28,6 +28,6 @@ body .badAppleCover {
     position: absolute;
     z-index: 999999;
     opacity: 0;
-    filter: grayscale(50%) !important;
     object-fit: cover;
+    image-rendering: optimizeSpeed;
 }
