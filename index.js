@@ -54,7 +54,7 @@ function playBadApple() {
     document.body.appendChild(cover);
 
     const canvas = new OffscreenCanvas(window.innerWidth, window.innerHeight);
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const ctx = canvas.getContext('2d', { willReadFrequently: true, desynchronized: true, alpha: false });
     canvas.width = video.width;
     canvas.height = video.height;
 
