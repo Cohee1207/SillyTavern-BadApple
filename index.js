@@ -3,7 +3,8 @@ createButton();
 function createButton() {
     const menu = document.getElementById('extensionsMenu');
     const extensionButton = document.createElement('div');
-    extensionButton.classList.add('list-group-item', 'flex-container', 'flexGap5');
+    extensionButton.classList.add('list-group-item', 'flex-container', 'flexGap5', 'interactable');
+    extensionButton.tabIndex = 0;
     const icon = document.createElement('i');
     icon.classList.add('fa-solid', 'fa-apple-whole');
     const text = document.createElement('span');
